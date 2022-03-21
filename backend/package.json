@@ -1,5 +1,5 @@
 {
-  "name": "express-mesto-gha",
+  "name": "express-mesto",
   "version": "1.0.0",
   "description": "server-for-mesto-nodejs",
   "main": "app.js",
@@ -8,10 +8,6 @@
     "lint": "npx eslint .",
     "dev": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HannahStarling/express-mesto-gha.git"
-  },
   "keywords": [
     "node.js",
     "mesto",
@@ -19,9 +15,6 @@
   ],
   "author": "Anna Tuban",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HannahStarling/express-mesto-gha/issues"
-  },
   "homepage": "https://github.com/HannahStarling/express-mesto-gha#readme",
   "devDependencies": {
     "eslint": "^8.10.0",
