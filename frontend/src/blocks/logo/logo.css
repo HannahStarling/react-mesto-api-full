@@ -1,0 +1,9 @@
+.logo {
+  margin: 0;
+}
+
+@media all and (max-width: 680px) {
+  .logo {
+    width: 40%;
+  }
+}

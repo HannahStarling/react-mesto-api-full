@@ -1,0 +1,4 @@
+.elements__like-btn_active {
+  background: #fff url(../../../../images/like-btn_active.svg) no-repeat center /
+    contain;
+}

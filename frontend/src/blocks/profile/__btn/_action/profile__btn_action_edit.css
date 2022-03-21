@@ -1,0 +1,16 @@
+.profile__btn_action_edit {
+  padding: 10px;
+  max-width: 10px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  background: url(../../../../images/edit-btn.svg) no-repeat center / 50%;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+
+@media screen and (max-width: 680px) {
+  .profile__btn_action_edit {
+    padding: 7px;
+  }
+}

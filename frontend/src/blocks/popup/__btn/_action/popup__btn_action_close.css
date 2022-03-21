@@ -1,0 +1,26 @@
+.popup__btn_action_close {
+  background: transparent url(../../../../images/cross-btn.svg) no-repeat center /
+    cover;
+  border: none;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  right: -44px;
+  top: -36px;
+  transform: rotate(45deg);
+}
+
+.popup__btn_action_close:hover {
+  opacity: 0.6;
+}
+
+@media all and (max-width: 620px) {
+  .popup__btn_action_close {
+    width: 25px;
+    height: 25px;
+    right: 0;
+    top: -30px;
+  }
+}

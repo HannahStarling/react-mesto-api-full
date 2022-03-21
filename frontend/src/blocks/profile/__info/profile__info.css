@@ -1,0 +1,19 @@
+.profile__info {
+  max-width: 60%;
+  margin: auto 0;
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) min-content;
+  grid-template-rows: repeat(2, min-content);
+  grid-column-gap: 17px;
+  grid-row-gap: 16px;
+  align-items: end;
+}
+
+@media all and (max-width: 680px) {
+  .profile__info {
+    max-width: 88.125%;
+    grid-template-columns: minmax(min-content, 189px) min-content;
+    margin: 0 auto 36px;
+    gap: 10px;
+  }
+}

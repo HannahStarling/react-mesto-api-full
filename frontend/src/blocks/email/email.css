@@ -1,0 +1,8 @@
+.email {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.12;
+  /* text-decoration-line: underline; */
+  align-self: center;
+}

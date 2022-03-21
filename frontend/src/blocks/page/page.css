@@ -1,0 +1,22 @@
+.page {
+  width: calc(100% - 200px * 2);
+  min-width: 320px;
+  background-color: #000;
+}
+
+@media all and (max-width: 1024px) {
+  .page {
+    width: calc(100% - 100px * 2);
+  }
+}
+@media all and (max-width: 768px) {
+  .page {
+    width: calc(100% - 50px * 2);
+  }
+}
+
+@media all and (max-width: 680px) {
+  .page {
+    width: 100%;
+  }
+}

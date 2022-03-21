@@ -1,0 +1,4 @@
+.popup__error {
+  display: flex;
+  flex-direction: column;
+}

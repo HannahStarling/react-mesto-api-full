@@ -1,0 +1,27 @@
+.login__item {
+  border: none;
+  width: 100%;
+  background: transparent;
+  border-bottom: 2px solid #ccc;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ccc;
+  padding: 0 0 13px 0;
+}
+
+.login__item:-webkit-autofill,
+.login__item:-webkit-autofill:hover,
+.login__item:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.login__item:focus {
+  background: transparent;
+  outline: none;
+}
+
+.login__item:active {
+  background: transparent;
+  outline: none;
+}

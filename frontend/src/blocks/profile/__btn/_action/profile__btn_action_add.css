@@ -1,0 +1,18 @@
+.profile__btn_action_add {
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 23px 73px;
+  background: url(../../../../images/cross-btn.svg) no-repeat center;
+  margin: 0 0 0 auto;
+  align-self: center;
+}
+
+@media all and (max-width: 1061px) {
+  .profile__btn_action_add {
+    margin: 0;
+    grid-column: 1/-1;
+    width: 100%;
+  }
+}

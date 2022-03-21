@@ -1,0 +1,11 @@
+.elements {
+  width: 100%;
+  padding: 50px 0 0;
+}
+
+@media all and (max-width: 680px) {
+  .elements {
+    width: 88.125%;
+    padding: 36px 0 0;
+  }
+}

@@ -1,0 +1,8 @@
+.elements__details-wrapper {
+  margin: 0 0 0 21px;
+  display: grid;
+  grid-template-areas:
+    'title like'
+    'title counter';
+  grid-template-columns: 1fr 0fr;
+}

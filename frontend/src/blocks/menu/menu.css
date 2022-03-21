@@ -1,0 +1,13 @@
+.menu {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+}
+
+@media all and (max-width: 680px) {
+  .menu {
+    display: none;
+  }
+}

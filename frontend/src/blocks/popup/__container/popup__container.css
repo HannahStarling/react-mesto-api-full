@@ -1,0 +1,11 @@
+.popup__container {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media all and (max-width: 620px) {
+  .popup__container_type_white {
+    max-width: 282px;
+  }
+}

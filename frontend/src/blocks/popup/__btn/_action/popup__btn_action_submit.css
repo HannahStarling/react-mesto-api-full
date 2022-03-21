@@ -1,0 +1,23 @@
+.popup__btn_action_submit {
+  background-color: #000;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.78px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 18px;
+}
+
+.popup__btn_action_submit:hover {
+  opacity: 0.8;
+}
+
+@media all and (max-width: 620px) {
+  .popup__btn_action_submit {
+    font-size: 14px;
+    line-height: 17px;
+    min-height: 46px;
+  }
+}
