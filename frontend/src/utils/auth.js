@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'api.mesto.hannahstarling.nomoredomains.work';
 
 const prepareData = (res) => {
   return res.ok
