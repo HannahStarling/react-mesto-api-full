@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
@@ -13,6 +14,29 @@ const { requestLogger, errorLogger } = require('./middlewars/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+const allowedCors = [
+  'https://mesto.mshannahstarling.nomoredomains.work',
+  'https://api.mesto.hannahstarling.nomoredomains.work',
+  'mesto.mshannahstarling.nomoredomains.work',
+  'api.mesto.hannahstarling.nomoredomains.work',
+  'https://localhost:3000',
+];
+
+const corsOptions = {
+  credentials: true,
+  origin(origin, callback) {
+    if (allowedCors.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors()); // include before other routes
 app.use(cookieParser());
 app.use(express.json()); // bodyParser in framework
 app.use(requestLogger);
