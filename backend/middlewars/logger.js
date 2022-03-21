@@ -1,7 +1,25 @@
-/* eslint-disable no-console */
-const logger = (req, res, next) => {
-  console.log(req.method, req.path);
-  next();
-};
+const winston = require('winston');
+const expressWinston = require('express-winston');
 
-module.exports = { logger };
+const dirname = 'logs';
+const format = winston.format.json();
+
+const requestLogger = expressWinston.logger({
+  transports: [
+    new winston.transports.File({ dirname, filename: 'request.log' }),
+  ],
+  format,
+});
+
+// логгер ошибок
+const errorLogger = expressWinston.errorLogger({
+  transports: [
+    new winston.transports.File({ dirname, filename: 'error.log' }),
+  ],
+  format,
+});
+
+module.exports = {
+  requestLogger,
+  errorLogger,
+};

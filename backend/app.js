@@ -8,18 +8,20 @@ const { login, createUser } = require('./controllers/users');
 const { errorHandler, handleNotFound } = require('./middlewars/errorHandler');
 const { validateUser } = require('./validation/validation');
 const { auth } = require('./middlewars/auth');
+const { requestLogger, errorLogger } = require('./middlewars/logger');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json()); // bodyParser in framework
-
+app.use(requestLogger);
 app.post('/signin', validateUser, login);
 app.post('/signup', validateUser, createUser);
 app.use(auth);
 app.use(userRouter);
 app.use(cardRouter);
+app.use(errorLogger);
 app.use(errors()); // celebrate error handler
 app.use(handleNotFound);
 app.use(errorHandler);
