@@ -17,6 +17,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'GET',
       headers: this._headers,
     }).then(this._prepareData);
@@ -24,6 +25,7 @@ class Api {
 
   setUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -35,12 +37,14 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       headers: this._headers,
     }).then(this._prepareData);
   }
 
   postCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -52,6 +56,7 @@ class Api {
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     }).then(this._prepareData);
@@ -59,6 +64,7 @@ class Api {
 
   setAvatar({ avatar }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -69,6 +75,7 @@ class Api {
 
   changeLikeCardStatus(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      credentials: 'include',
       method: isLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
     }).then(this._prepareData);
@@ -86,5 +93,13 @@ const api = new Api({
     'Content-Type': 'application/json',
   },
 });
+
+// const api = new Api({
+//   baseUrl: 'api.mesto.hannahstarling.nomoredomains.work',
+// credentials: 'include',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// });
 
 export default api;

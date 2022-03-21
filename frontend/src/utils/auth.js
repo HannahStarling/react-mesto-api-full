@@ -17,6 +17,7 @@ const prepareData = (res) => {
 
 const request = ({ url, method = 'POST', token, body }) => {
   const config = {
+    credentials: 'include',
     method,
     headers: {
       Accept: 'application/json',
