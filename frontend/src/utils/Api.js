@@ -4,6 +4,15 @@ class Api {
     this._headers = headers;
   }
 
+  request = ({ url, method = 'GET', body }) => {
+    const config = {
+      method,
+      headers: this._headers,
+      ...(!!body && { body: JSON.stringify(body) }),
+    };
+    return fetch(`${this._baseUrl}${url}`, config).then(this._prepareData);
+  };
+
   _prepareData(res) {
     return res.ok
       ? res.json()
@@ -15,71 +24,20 @@ class Api {
         });
   }
 
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      credentials: 'include',
-      method: 'GET',
-      headers: this._headers,
-    }).then(this._prepareData);
-  }
+  getUserInfo = () => this.request({ url: '/users/me' });
 
-  setUserInfo({ name, about }) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name,
-        about,
-      }),
-    }).then(this._prepareData);
-  }
+  setUserInfo = ({ name, about }) => this.request({ url: '/users/me', method: 'PATCH', body: { name, about } });
 
-  getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
-      headers: this._headers,
-    }).then(this._prepareData);
-  }
+  getInitialCards = () => this.request({ url: '/cards' });
 
-  postCard({ name, link }) {
-    return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
-    }).then(this._prepareData);
-  }
+  postCard = ({ name, link }) => this.request({ url: '/cards', method: 'POST', body: { name, link } });
 
-  deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
-      credentials: 'include',
-      method: 'DELETE',
-      headers: this._headers,
-    }).then(this._prepareData);
-  }
+  deleteCard = (id) => this.request({ url: `/cards/${id}`, method: 'DELETE' });
 
-  setAvatar({ avatar }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: avatar,
-      }),
-    }).then(this._prepareData);
-  }
+  setAvatar = ({ avatar }) => this.request({ url: '/users/me/avatar', method: 'PATCH', body: { avatar } });
 
-  changeLikeCardStatus(id, isLiked) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      credentials: 'include',
-      method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._headers,
-    }).then(this._prepareData);
-  }
+  changeLikeCardStatus = (id, isLiked) =>
+    this.request({ url: `/cards/${id}/likes`, method: isLiked ? 'PUT' : 'DELETE' });
 
   getAllInitialData() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
@@ -94,6 +52,7 @@ const api = new Api({
   },
 });
 
+export default api;
 // const api = new Api({
 //   baseUrl: 'api.mesto.hannahstarling.nomoredomains.work',
 // credentials: 'include',
@@ -101,5 +60,3 @@ const api = new Api({
 //     'Content-Type': 'application/json'
 //   }
 // });
-
-export default api;
