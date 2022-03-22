@@ -21,6 +21,7 @@ const allowedCors = [
   'mesto.mshannahstarling.nomoredomains.work',
   'api.mesto.hannahstarling.nomoredomains.work',
   'https://localhost:3000',
+  'http://localhost:3001',
 ];
 
 const corsOptions = {
@@ -35,8 +36,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors());
 
-app.options('*', cors()); // include before other routes
 app.use(cookieParser());
 app.use(express.json()); // bodyParser in framework
 app.use(requestLogger);
