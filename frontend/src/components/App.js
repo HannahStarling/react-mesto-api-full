@@ -75,38 +75,35 @@ function App() {
       });
       setIsErrorPopupOpen(!isErrorPopupOpen);
     },
-    [closeAllPopups, isErrorPopupOpen]
+    [closeAllPopups, isErrorPopupOpen],
   );
 
   const closeError = () => {
     setIsErrorPopupOpen(!isErrorPopupOpen);
   };
 
-  useEffect(() => {
-    function tokenCheck() {
-      const jwt = localStorage.getItem('jwt');
-
-      if (jwt) {
-        auth
-          .getContent(jwt)
-          .then((res) => {
-            if (res) {
-              setLoggedIn(true);
-              setEmail(res.data.email);
-              history.push('/');
-            }
-          })
-          .catch(showError);
-      }
-    }
-    tokenCheck();
+  const tokenCheck = useCallback(() => {
+    auth
+      .getContent()
+      .then(({ email }) => {
+        if (email) {
+          setLoggedIn(true);
+          setEmail(email);
+          history.push('/');
+        }
+      })
+      .catch(showError);
   }, [history, showError]);
+
+  useEffect(() => {
+    tokenCheck();
+  }, [tokenCheck]);
 
   function handleRegistration(password, email) {
     auth
       .register(password, email)
-      .then((result) => {
-        setEmail(result.data.email);
+      .then(({ email }) => {
+        setEmail(email);
         setIsRegistrationSuccess(true);
         history.push('/sign-in');
       })
@@ -115,35 +112,25 @@ function App() {
   }
 
   function handleLogin(password, email) {
-    auth
-      .authorize(password, email)
-      .then(({ token }) => {
-        if (!token) return;
-        localStorage.setItem('jwt', token);
-        auth.getContent(token).then((res) => {
-          setEmail(res.data.email);
-          setLoggedIn(true);
-          history.push('/');
-        });
-      })
-      .catch(showError);
+    auth.authorize(password, email).then(tokenCheck()).catch(showError);
   }
 
   function onSignOut() {
-    localStorage.removeItem('jwt');
     setLoggedIn(false);
   }
 
   useEffect(() => {
-    api
-      .getAllInitialData()
-      .then((data) => {
-        const [cards, info] = data;
-        setCurrentUser(info);
-        setCards(cards);
-      })
-      .catch(showError);
-  }, [showError]);
+    if (loggedIn) {
+      api
+        .getAllInitialData()
+        .then((data) => {
+          const [cards, info] = data;
+          setCurrentUser(info);
+          setCards(cards);
+        })
+        .catch(showError);
+    }
+  }, [loggedIn, showError]);
 
   function handleAddCard(newCard) {
     api
