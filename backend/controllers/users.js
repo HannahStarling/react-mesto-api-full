@@ -65,6 +65,7 @@ const createUser = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         _id: user._id,
+        email: user.email,
       });
     }))
     .catch((err) => {
@@ -159,6 +160,11 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res, next) => {
+  res.clearCookie('jwt').send({ message: 'Пользователь успешно ' });
+  next();
+};
+
 module.exports = {
   getUsers,
   getUser,
@@ -166,5 +172,6 @@ module.exports = {
   updateUser,
   updateUserAvatar,
   login,
+  logout,
   getCurrentUser,
 };

@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
-const { login, createUser } = require('./controllers/users');
+const { login, logout, createUser } = require('./controllers/users');
 const { errorHandler, handleNotFound } = require('./middlewars/errorHandler');
 const { validateUser } = require('./validation/validation');
 const { auth } = require('./middlewars/auth');
@@ -43,6 +43,8 @@ app.use(express.json()); // bodyParser in framework
 app.use(requestLogger);
 app.post('/signin', validateUser, login);
 app.post('/signup', validateUser, createUser);
+app.delete('/signout', logout);
+
 app.use(auth);
 app.use(userRouter);
 app.use(cardRouter);
