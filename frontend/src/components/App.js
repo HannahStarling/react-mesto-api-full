@@ -92,8 +92,10 @@ function App() {
           history.push('/');
         }
       })
-      .catch(showError);
-  }, [history, showError]);
+      .catch(() => {
+        setLoggedIn(false);
+      });
+  }, [setEmail, setLoggedIn, history]);
 
   useEffect(() => {
     tokenCheck();
@@ -102,8 +104,7 @@ function App() {
   function handleRegistration(password, email) {
     auth
       .register(password, email)
-      .then(({ email }) => {
-        setEmail(email);
+      .then(() => {
         setIsRegistrationSuccess(true);
         history.push('/sign-in');
       })
@@ -112,10 +113,21 @@ function App() {
   }
 
   function handleLogin(password, email) {
-    auth.authorize(password, email).then(tokenCheck()).catch(showError);
+    if (!email || !password) return;
+    auth
+      .authorize(password, email)
+      .then(({ message }) => {
+        if (message) {
+          setLoggedIn(true);
+          setEmail(email);
+          history.push('/');
+        }
+      })
+      .catch(showError);
   }
 
   function onSignOut() {
+    auth.signOut();
     setLoggedIn(false);
   }
 

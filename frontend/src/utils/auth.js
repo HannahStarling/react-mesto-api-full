@@ -1,4 +1,6 @@
-export const BASE_URL = 'api.mesto.hannahstarling.nomoredomains.work';
+// export const BASE_URL = 'api.mesto.hannahstarling.nomoredomains.work';
+// export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://localhost:3000';
 
 const prepareData = (res) => {
   return res.ok
@@ -15,14 +17,13 @@ const prepareData = (res) => {
       });
 };
 
-const request = ({ url, method = 'POST', token, body }) => {
+const request = ({ url, method = 'POST', body }) => {
   const config = {
     credentials: 'include',
     method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      ...(!!token && { Authorization: `Bearer ${token}` }),
     },
     ...(!!body && { body: JSON.stringify(body) }),
   };
@@ -33,4 +34,6 @@ export const register = (password, email) => request({ url: '/signup', body: { p
 
 export const authorize = (password, email) => request({ url: '/signin', body: { password, email } });
 
-export const getContent = (token) => request({ url: '/users/me', method: 'GET', token });
+export const getContent = () => request({ url: '/users/me', method: 'GET' });
+
+export const signOut = () => request({ url: '/signout', method: 'DELETE' });
