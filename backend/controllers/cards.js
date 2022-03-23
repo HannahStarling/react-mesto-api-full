@@ -46,6 +46,7 @@ const createCard = (req, res, next) => {
         link: card.link,
         owner: card.owner,
         _id: card._id,
+        likes: card.likes,
       });
     })
     .catch((err) => {
