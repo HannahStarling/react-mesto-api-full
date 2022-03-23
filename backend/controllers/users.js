@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { ApiError } = require('../errors/ApiError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+const jwtKey = NODE_ENV !== 'production' ? JWT_SECRET : 'brillian-secret-key';
+
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.status(200).send(users))
@@ -142,7 +145,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
+      const token = jwt.sign({ _id: user._id }, jwtKey, {
         expiresIn: '7d',
       });
       res
