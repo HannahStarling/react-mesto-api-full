@@ -11,6 +11,7 @@ const { errorHandler, handleNotFound } = require('./middlewars/errorHandler');
 const { validateUser } = require('./validation/validation');
 const { auth } = require('./middlewars/auth');
 const { requestLogger, errorLogger } = require('./middlewars/logger');
+const { startCrashTest } = require('./middlewars/crashTest');
 
 const { PORT = 3000 } = process.env;
 
@@ -42,6 +43,7 @@ app.options('*', cors());
 app.use(cookieParser());
 app.use(express.json()); // bodyParser in framework
 app.use(requestLogger);
+app.get('/crash-test', startCrashTest);
 app.post('/signin', validateUser, login);
 app.post('/signup', validateUser, createUser);
 app.delete('/signout', logout);
