@@ -158,7 +158,7 @@ function App() {
     api
       .setAvatar(currentUserAvatar)
       .then((avatar) => {
-        setCurrentUser(avatar);
+        setCurrentUser({ ...currentUser, avatar });
         closeAllPopups();
       })
       .catch(showError);
@@ -168,7 +168,7 @@ function App() {
     api
       .setUserInfo(currentUserInfo)
       .then((info) => {
-        setCurrentUser(info);
+        setCurrentUser({ ...currentUser, info });
         closeAllPopups();
       })
       .catch(showError);

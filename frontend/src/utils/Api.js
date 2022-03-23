@@ -6,6 +6,7 @@ class Api {
 
   request = ({ url, method = 'GET', body }) => {
     const config = {
+      credentials: 'include',
       method,
       headers: this._headers,
       ...(!!body && { body: JSON.stringify(body) }),
@@ -45,18 +46,10 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33',
+  baseUrl: 'api.mesto.hannahstarling.nomoredomains.work',
   headers: {
-    authorization: '5c55e35b-36cb-4e1a-9a83-df32a17d9ee6',
     'Content-Type': 'application/json',
   },
 });
 
 export default api;
-// const api = new Api({
-//   baseUrl: 'api.mesto.hannahstarling.nomoredomains.work',
-// credentials: 'include',
-//   headers: {
-//     'Content-Type': 'application/json'
-//   }
-// });
