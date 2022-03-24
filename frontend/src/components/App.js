@@ -132,17 +132,16 @@ function App() {
   }
 
   useEffect(() => {
-    if (loggedIn) {
-      api
-        .getAllInitialData()
-        .then((data) => {
-          const [cards, info] = data;
-          setCurrentUser(info);
-          setCards(cards);
-        })
-        .catch(showError);
-    }
-  }, [loggedIn, showError]);
+    api
+      .getAllInitialData()
+      .then((data) => {
+        const [cards, info] = data;
+        setCurrentUser(info);
+        setCards(cards);
+      })
+      .catch(showError);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleAddCard(newCard) {
     api
