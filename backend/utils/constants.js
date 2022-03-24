@@ -2,6 +2,7 @@ const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 
 const allowedCors = [
@@ -28,7 +29,7 @@ const corsOptions = {
 };
 
 const { NODE_ENV, JWT_SECRET, PORT = 3000 } = process.env;
-const jwtKey = NODE_ENV !== 'production' ? JWT_SECRET : 'brillian-secret-key';
+const jwtKey = NODE_ENV === 'production' ? JWT_SECRET : 'brillian-secret-key';
 
 module.exports = {
   allowedCors,
