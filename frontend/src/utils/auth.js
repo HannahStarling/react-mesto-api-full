@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.mesto.hannahstarling.nomoredomains.work';
+export const BASE_URL = 'https://api.mesto.hannahstarling.nomoredomains.work';
 
 const prepareData = (res) => {
   return res.ok
