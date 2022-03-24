@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { login, logout, createUser } = require('./controllers/users');
@@ -40,9 +42,14 @@ const corsOptions = {
   },
 };
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+});
+
 app.use(cors(corsOptions));
 app.options('*', cors());
-
+app.use(helmet()); // Content-Security-Policy
+app.use(limiter); // rate limiting middleware to all requests
 app.use(cookieParser());
 app.use(express.json()); // bodyParser in framework
 app.use(requestLogger);
