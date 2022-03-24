@@ -18,10 +18,13 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const allowedCors = [
+  'http://mesto.mshannahstarling.nomoredomains.work',
+  'http://api.mesto.hannahstarling.nomoredomains.work',
   'https://mesto.mshannahstarling.nomoredomains.work',
   'https://api.mesto.hannahstarling.nomoredomains.work',
   'mesto.mshannahstarling.nomoredomains.work',
   'api.mesto.hannahstarling.nomoredomains.work',
+  'http://localhost:3000',
   'https://localhost:3000',
   'http://localhost:3001',
 ];
