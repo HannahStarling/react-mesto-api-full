@@ -33,9 +33,9 @@ app.use(auth);
 app.use(userRouter);
 app.use(cardRouter);
 //  errors
+app.use(handleNotFound);
 app.use(errorLogger);
 app.use(errors()); // celebrate error handler
-app.use(handleNotFound);
 app.use(errorHandler);
 
 const start = async () => {
