@@ -2,9 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { ApiError } = require('../errors/ApiError');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
-const jwtKey = NODE_ENV !== 'production' ? JWT_SECRET : 'brillian-secret-key';
+const { jwtKey } = require('../utils/constants');
 
 const getUsers = (req, res, next) => {
   User.find({})

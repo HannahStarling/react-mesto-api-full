@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const { ApiError } = require('../errors/ApiError');
+const { jwtKey } = require('../utils/constants');
 
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
   try {
-    payload = jwt.verify(token, 'brillian-secret-key');
+    payload = jwt.verify(token, jwtKey);
   } catch (err) {
     throw ApiError.unauthorized();
   }
