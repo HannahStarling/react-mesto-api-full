@@ -132,16 +132,17 @@ function App() {
   }
 
   useEffect(() => {
-    api
-      .getAllInitialData()
-      .then((data) => {
-        const [cards, info] = data;
-        setCurrentUser(info);
-        setCards(cards);
-      })
-      .catch(showError);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (loggedIn) {
+      api
+        .getAllInitialData()
+        .then((data) => {
+          const [cards, info] = data;
+          setCurrentUser(info);
+          setCards(cards);
+        })
+        .catch(() => console.log('Невозможно получить доступ, если вы не авторизованы'));
+    }
+  }, [loggedIn]);
 
   function handleAddCard(newCard) {
     api
@@ -156,8 +157,13 @@ function App() {
   function handleUpdateAvatar(currentUserAvatar) {
     api
       .setAvatar(currentUserAvatar)
-      .then((avatar) => {
-        setCurrentUser({ ...currentUser, avatar });
+      .then(({ avatar }) => {
+        setCurrentUser((prevState) => {
+          return {
+            ...prevState,
+            avatar,
+          };
+        });
         closeAllPopups();
       })
       .catch(showError);
@@ -167,7 +173,12 @@ function App() {
     api
       .setUserInfo(currentUserInfo)
       .then((info) => {
-        setCurrentUser({ ...currentUser, info });
+        setCurrentUser((prevState) => {
+          return {
+            ...prevState,
+            ...info,
+          };
+        });
         closeAllPopups();
       })
       .catch(showError);
@@ -184,7 +195,7 @@ function App() {
   }
 
   function handleCardLike({ likes, id }) {
-    const isLiked = likes.find(({ _id: UserId }) => UserId === currentUser._id);
+    const isLiked = likes.find((userId) => userId === currentUser._id);
     api
       .changeLikeCardStatus(id, !isLiked)
       .then((newCard) => {

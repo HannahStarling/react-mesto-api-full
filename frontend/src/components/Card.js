@@ -6,7 +6,7 @@ function Card({
   name,
   likes,
   likes: { length },
-  owner: { _id: owner },
+  owner,
   id,
   selectDeletedCard,
   onCardClick,
@@ -17,7 +17,7 @@ function Card({
 }) {
   const { _id } = useContext(CurrentUserContext);
   const isOwn = owner === _id;
-  const isLiked = likes.find(({ _id: id }) => id === _id);
+  const isLiked = likes.find((owner) => owner === _id);
 
   function handleCardLike() {
     onCardLike({ likes, id });
