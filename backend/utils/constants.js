@@ -29,12 +29,12 @@ const corsOptions = {
 };
 
 const { NODE_ENV, JWT_SECRET, PORT = 3000 } = process.env;
-const jwtKey = NODE_ENV === 'production' ? JWT_SECRET : 'brillian-secret-key';
+const JWT_KEY = NODE_ENV === 'production' ? JWT_SECRET : 'brillian-secret-key';
 
 module.exports = {
   allowedCors,
   corsOptions,
   limiter,
-  jwtKey,
+  JWT_KEY,
   PORT,
 };
